@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cekDNS beta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #ffffff;
+        }
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.main-text .cek {
+    color: #336699;
+}
+
+.main-text .dns {
+    color: black;
+}
+
+.beta {
+    font-size: 12px;
+    color: #999;
+    align-self: flex-end;
+    padding-bottom: 4px;
+}
+
+        .logo small {
+            font-size: 12px;
+            vertical-align: top;
+            color: #999;
+        }
+        form {
+            margin-top: 30px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #336699;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .info {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #333;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .footer {
+            margin-top: 100px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+ <div class="logo">
+  <span class="main-text">
+    <span class="cek">cek</span><span class="dns">DNS</span>
+  </span>
+  <span class="beta">beta</span>
+</div>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="domain" placeholder="Domain name" required />
+        <button type="submit">Report</button>
+    </form>
+
+    <div class="info">
+        <p>CekDNS checks the health and configuration and provides DNS report and mail servers report.<br/>
+        And provides suggestions to fix and improve them, with references to protocols’ official documentation.</p>
+    </div>
+
+    <div class="footer">
+        &copy; <a href="#">Mainan</a> - web hosting | VPS hosting by CekVPS |
+        Made with <a href="https://www.python.org/">Python</a> &amp; <a href="https://www.djangoproject.com/">Django</a>
+    </div>
+</body>
+</html>

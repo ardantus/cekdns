@@ -1,0 +1,37 @@
+services:
+  web:
+    build: ./app
+    container_name: dnschecker-web
+    volumes:
+      - ./app:/app
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    networks:
+      - dnsnet
+    
+  nginx:
+    image: nginx:alpine
+    container_name: dnschecker-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/static:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - dnsnet
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TUNNEL_TOKEN}
+    networks:
+      - dnsnet
+
+networks:
+  dnsnet:
+    driver: bridge
